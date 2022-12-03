@@ -18,10 +18,8 @@ default-features = false
 features = ["json"]
 
 [lib]
-name = "lib"
-path = "src/lib.rs"
 doc = false
 
 [[bin]]
 name = "main"
-path = "src/bin/main.rs"
+doc = false
