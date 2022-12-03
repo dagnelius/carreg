@@ -39,6 +39,7 @@ diesel::table! {
     ar_modelis (id) {
         id -> Integer,
         ar_marka_id -> Integer,
+        modelis -> Varchar,
     }
 }
 
