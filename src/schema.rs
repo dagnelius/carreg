@@ -47,7 +47,7 @@ diesel::table! {
     ar_motors (id) {
         id -> Integer,
         motora_tilpums -> Integer,
-        ar_degviela_id -> Nullable<Integer>,
+        ar_degviela_id -> Integer,
     }
 }
 
@@ -57,7 +57,7 @@ diesel::table! {
         apliecibas_nr -> Varchar,
         registracijas_nr -> Varchar,
         datums_no -> Date,
-        ar_turetaja_adrese_id -> Nullable<Integer>,
+        ar_turetaja_adrese_id -> Integer,
     }
 }
 

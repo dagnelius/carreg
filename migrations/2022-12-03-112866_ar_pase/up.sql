@@ -4,6 +4,6 @@ create table ar_pase (
   apliecibas_nr varchar(9) not null,
   registracijas_nr varchar(6) not null,
   datums_no date not null,
-  ar_turetaja_adrese_id int,
+  ar_turetaja_adrese_id int not null,
   FOREIGN KEY (ar_turetaja_adrese_id) REFERENCES ar_turetaja_adrese(id)
 );
