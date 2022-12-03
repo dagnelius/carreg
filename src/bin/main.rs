@@ -1,17 +1,4 @@
-// #![feature(proc_macro_hygiene, decl_macro)]
 
-// #[macro_use]
-// extern crate rocket;
-
-// use rocket_contrib::json::Json;
-// use rocket::http::RawStr;
-// use lib::database;
-// use lib::models::ReceivedData;
-
-// fn main() {
-//   let connection = &mut lib::database::establish_connection();
-//   rocket().launch();
-// }
 
 // #[get("/")]
 // fn get_cars() -> Json<Option<Vec<ReceivedData>>> {
@@ -40,23 +27,35 @@
 //     // get_movies, get_movie, create_movie, delete_movie
 //   )
 // }
+#![feature(proc_macro_hygiene, decl_macro)]
 
-use self::models::*;
-use diesel::prelude::*;
+#[macro_use]
+extern crate rocket;
+
+use rocket::http::RawStr;
+use rocket_contrib::json::Json;
+use models::ARAuto;
+
+
 use carreg::*;
 
 fn main() {
-    use self::schema::ar_auto::dsl::*;
+    rocket().launch();
+}
 
-    let connection = &mut establish_connection();
-    let results = ar_auto
-        .limit(5)
-        .load::<ARAuto>(connection)
-        .expect("Error loading posts");
+#[get("/")]
+fn get_cars() -> Json<Option<Vec<ARAuto>>> {
+    Json(read_cars())
+}
 
-    println!("Displaying {} posts", results.len());
-    for post in results {
-        println!("{:?}", post);
-        println!("-----------");
-    }
+#[delete("/<id>")]
+fn delete_car(id: i32) -> Json<bool> {
+    Json(remove_car(id))
+}
+
+fn rocket() -> rocket::Rocket {
+    rocket::ignite().mount(
+        "/api/cars",
+        routes![get_cars, delete_car],
+    )
 }

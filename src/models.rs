@@ -1,6 +1,7 @@
 use diesel::prelude::*;
+use serde::{Serialize, Deserialize};
 
-#[derive(Queryable, Debug)]
+#[derive(Queryable, Debug, Serialize, Deserialize)]
 pub struct ARAuto {
   pub id: i32,
   pub ar_pase_id: i32,
